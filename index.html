@@ -211,7 +211,7 @@
     .demo .section-title { color: var(--white); }
     .demo .section-lead { color: rgba(255,255,255,0.78); }
 
-    .demo-wrapper { max-width: 880px; margin: 0 auto; }
+    .demo-wrapper { max-width: 900px; margin: 0 auto; }
 
     .browser-mockup {
       background: #0f172a;
@@ -258,34 +258,25 @@
       color: #1e293b;
     }
 
-    /* Thematic construction hero */
+    /* Thematic construction hero with photo */
     .mockup-hero {
       background: 
-        linear-gradient(135deg, rgba(30,41,59,0.92) 0%, rgba(15,23,42,0.88) 100%),
-        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
-        linear-gradient(160deg, #1e3a5f 0%, #0f172a 50%, #1c1917 100%);
-      background-size: auto, 60px 60px, auto;
+        linear-gradient(135deg, rgba(15,23,42,0.82) 0%, rgba(30,41,59,0.75) 100%),
+        url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&q=80') center/cover no-repeat;
       color: white;
-      padding: 56px 40px 48px;
+      padding: 64px 40px 56px;
       text-align: center;
       position: relative;
-      overflow: hidden;
-    }
-
-    .mockup-hero::before {
-      content: "";
-      position: absolute;
-      top: -30%;
-      right: -15%;
-      width: 280px;
-      height: 280px;
-      background: radial-gradient(circle, rgba(196,92,38,0.22) 0%, transparent 70%);
-      pointer-events: none;
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     .mockup-badge {
       display: inline-block;
-      background: rgba(196,92,38,0.25);
+      background: rgba(196,92,38,0.35);
       color: #fdba74;
       font-size: 12px;
       font-weight: 600;
@@ -300,14 +291,14 @@
       margin-bottom: 12px;
       font-weight: 700;
       letter-spacing: -0.5px;
-      position: relative;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
 
     .mockup-hero p {
       font-size: 16px;
-      opacity: 0.9;
+      opacity: 0.95;
       margin-bottom: 26px;
-      position: relative;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.3);
     }
 
     .mockup-btn {
@@ -318,79 +309,53 @@
       border-radius: 8px;
       font-size: 15px;
       font-weight: 600;
-      box-shadow: 0 4px 14px rgba(196,92,38,0.4);
-      position: relative;
+      box-shadow: 0 4px 14px rgba(196,92,38,0.45);
     }
 
     .mockup-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 18px;
-      padding: 32px 28px 28px;
+      gap: 16px;
+      padding: 24px 20px;
       background: #f8fafc;
     }
 
     .mockup-card {
       background: white;
       border-radius: 12px;
-      padding: 22px 16px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
       border: 1px solid #e2e8f0;
     }
 
-    .mockup-card .icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      margin: 0 auto 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0;
-      position: relative;
+    .mockup-card .photo {
+      height: 110px;
+      background-size: cover;
+      background-position: center;
     }
 
-    .mockup-card:nth-child(1) .icon {
-      background: #ffedd5;
-    }
-    .mockup-card:nth-child(1) .icon::after {
-      content: "";
-      width: 20px;
-      height: 20px;
-      border: 3px solid #c2410c;
-      border-radius: 4px;
-      transform: rotate(45deg);
+    .mockup-card:nth-child(1) .photo {
+      background-image: url('https://images.unsplash.com/photo-1590069261209-f8e9b8642343?w=600&q=80');
     }
 
-    .mockup-card:nth-child(2) .icon {
-      background: #e0f2fe;
-    }
-    .mockup-card:nth-child(2) .icon::after {
-      content: "";
-      width: 22px;
-      height: 16px;
-      border: 3px solid #0369a1;
-      border-bottom: none;
-      border-radius: 4px 4px 0 0;
-      position: relative;
+    .mockup-card:nth-child(2) .photo {
+      background-image: url('https://images.unsplash.com/photo-1676812901234-kkdfOe0iRu8?w=600&q=80');
+      background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80');
     }
 
-    .mockup-card:nth-child(3) .icon {
-      background: #dcfce7;
+    .mockup-card:nth-child(3) .photo {
+      background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80');
     }
-    .mockup-card:nth-child(3) .icon::after {
-      content: "";
-      width: 18px;
-      height: 18px;
-      border: 3px solid #15803d;
-      border-radius: 50%;
+
+    .mockup-card .info {
+      padding: 14px 12px 16px;
+      text-align: center;
     }
 
     .mockup-card h4 {
       font-size: 15px;
       color: #1e293b;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       font-weight: 600;
     }
 
@@ -404,24 +369,18 @@
       display: flex;
       justify-content: center;
       gap: 28px;
-      padding: 18px 20px;
+      padding: 16px 20px;
       background: #f1f5f9;
       border-top: 1px solid #e2e8f0;
       font-size: 13px;
       color: #475569;
     }
 
-    .mockup-trust span {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
     .mockup-footer {
       background: #1e293b;
       color: rgba(255,255,255,0.75);
       text-align: center;
-      padding: 18px;
+      padding: 16px;
       font-size: 13px;
     }
 
@@ -560,9 +519,10 @@
       }
       .header-contacts { display: none; }
       .hero { padding: 70px 0 80px; }
-      .mockup-hero { padding: 40px 24px 36px; }
-      .mockup-grid { padding: 20px; }
+      .mockup-hero { padding: 48px 24px 40px; min-height: 220px; }
+      .mockup-grid { padding: 16px; }
       .mockup-trust { flex-direction: column; gap: 10px; align-items: center; }
+      .mockup-card .photo { height: 140px; }
     }
 
     @media (max-width: 600px) {
@@ -683,19 +643,25 @@
             </div>
             <div class="mockup-grid">
               <div class="mockup-card">
-                <div class="icon"></div>
-                <h4>Фундамент</h4>
-                <p>от 180 000 ₽</p>
+                <div class="photo"></div>
+                <div class="info">
+                  <h4>Фундамент</h4>
+                  <p>от 180 000 ₽</p>
+                </div>
               </div>
               <div class="mockup-card">
-                <div class="icon"></div>
-                <h4>Коробка дома</h4>
-                <p>от 1,2 млн ₽</p>
+                <div class="photo"></div>
+                <div class="info">
+                  <h4>Коробка дома</h4>
+                  <p>от 1,2 млн ₽</p>
+                </div>
               </div>
               <div class="mockup-card">
-                <div class="icon"></div>
-                <h4>Отделка</h4>
-                <p>от 450 000 ₽</p>
+                <div class="photo"></div>
+                <div class="info">
+                  <h4>Отделка</h4>
+                  <p>от 450 000 ₽</p>
+                </div>
               </div>
             </div>
             <div class="mockup-trust">
@@ -708,7 +674,7 @@
             </div>
           </div>
         </div>
-        <p class="demo-caption">Это пример оформления. Для вашего бизнеса дизайн будет индивидуальным</p>
+        <p class="demo-caption">Это пример оформления. Для вашего бизнеса дизайн и фотографии будут индивидуальными</p>
         <div class="demo-cta">
           <a href="#contact" class="btn">Хочу такое демо под свою компанию</a>
         </div>

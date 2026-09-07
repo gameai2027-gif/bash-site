@@ -54,27 +54,27 @@
     }
 
     .logo-mark {
-      width: 58px;
-      height: 58px;
+      width: 54px;
+      height: 54px;
       flex-shrink: 0;
     }
 
     .logo-text {
-      font-size: 24px;
+      font-size: 23px;
       font-weight: 700;
       color: var(--slate);
-      letter-spacing: -0.6px;
+      letter-spacing: -0.5px;
       line-height: 1.1;
     }
 
     .logo-text span {
       display: block;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 500;
       color: var(--terracotta);
-      letter-spacing: 1.5px;
+      letter-spacing: 1.8px;
       text-transform: uppercase;
-      margin-top: 2px;
+      margin-top: 1px;
     }
 
     .header-contacts a {
@@ -258,10 +258,9 @@
       color: #1e293b;
     }
 
-    /* Thematic construction hero with photo */
     .mockup-hero {
       background: 
-        linear-gradient(135deg, rgba(15,23,42,0.82) 0%, rgba(30,41,59,0.75) 100%),
+        linear-gradient(135deg, rgba(15,23,42,0.78) 0%, rgba(30,41,59,0.72) 100%),
         url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&q=80') center/cover no-repeat;
       color: white;
       padding: 64px 40px 56px;
@@ -329,20 +328,22 @@
     }
 
     .mockup-card .photo {
-      height: 110px;
+      height: 120px;
       background-size: cover;
       background-position: center;
     }
 
+    /* Foundation - concrete slab */
     .mockup-card:nth-child(1) .photo {
-      background-image: url('https://images.unsplash.com/photo-1590069261209-f8e9b8642343?w=600&q=80');
+      background-image: url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&q=80');
     }
 
+    /* House frame - wooden framing */
     .mockup-card:nth-child(2) .photo {
-      background-image: url('https://images.unsplash.com/photo-1676812901234-kkdfOe0iRu8?w=600&q=80');
-      background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80');
+      background-image: url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&q=80');
     }
 
+    /* Finishing - modern finished house */
     .mockup-card:nth-child(3) .photo {
       background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80');
     }
@@ -522,7 +523,7 @@
       .mockup-hero { padding: 48px 24px 40px; min-height: 220px; }
       .mockup-grid { padding: 16px; }
       .mockup-trust { flex-direction: column; gap: 10px; align-items: center; }
-      .mockup-card .photo { height: 140px; }
+      .mockup-card .photo { height: 150px; }
     }
 
     @media (max-width: 600px) {
@@ -530,7 +531,7 @@
         flex-direction: column;
         align-items: center;
       }
-      .logo-mark { width: 48px; height: 48px; }
+      .logo-mark { width: 46px; height: 46px; }
     }
   </style>
 </head>
@@ -539,11 +540,14 @@
   <header>
     <div class="container header-inner">
       <div class="logo">
+        <!-- Selected style: BS interlocking monogram -->
         <svg class="logo-mark" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="64" height="64" rx="14" fill="#1E293B"/>
-          <path d="M16 18h20c7.5 0 12 5.5 12 12.5S43.5 43 36 43H16V18z" fill="none" stroke="#F8F7F4" stroke-width="2.8"/>
-          <path d="M28 31.5l12-7v14l-12-7z" fill="#C45C26"/>
-          <text x="26" y="38" fill="#F8F7F4" font-size="22" font-weight="700" font-family="system-ui,sans-serif">B</text>
+          <rect width="64" height="64" rx="12" fill="#1E293B"/>
+          <!-- B shape -->
+          <path d="M14 14h18c7 0 12 4.5 12 11s-5 11-12 11H20v14H14V14z" fill="none" stroke="#F8F7F4" stroke-width="3.2" stroke-linejoin="round"/>
+          <path d="M20 14h10c4.5 0 8 3 8 7.5S34.5 29 30 29H20V14z" fill="#1E293B"/>
+          <!-- S / accent interlocking -->
+          <path d="M34 22c0-4 3-7 8-7s8 3 8 7c0 3-2 5-5 6l-6 2c-3 1-5 3-5 6 0 4 3 7 8 7s8-3 8-7" fill="none" stroke="#C45C26" stroke-width="3.2" stroke-linecap="round"/>
         </svg>
         <div class="logo-text">
           BASH

@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BASH Site — Готовые сайты для бизнеса в Иглинском районе</title>
+  <meta name="description" content="Сначала смотрите демо-версию сайта под ваш бизнес. Если нравится — заключаем договор и завершаем работу. Локально. Понятно. Без риска.">
+  <style>
+    :root {
+      --slate: #1E293B;
+      --warm-bg: #F8F7F4;
+      --terracotta: #C45C26;
+      --text: #5C534A;
+      --sage: #5F7A61;
+      --white: #FFFFFF;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--warm-bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 17px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      padding: 28px 0;
+      background: var(--warm-bg);
+      border-bottom: 1px solid rgba(30, 41, 59, 0.08);
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-mark {
+      width: 48px;
+      height: 48px;
+    }
+
+    .logo-text {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--slate);
+      letter-spacing: -0.5px;
+    }
+
+    .logo-text span {
+      color: var(--terracotta);
+      font-weight: 500;
+      font-size: 15px;
+      margin-left: 4px;
+    }
+
+    .header-contacts a {
+      display: inline-block;
+      margin-left: 20px;
+      font-size: 15px;
+      color: var(--slate);
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .header-contacts a:hover {
+      color: var(--terracotta);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 90px 0 100px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 700;
+      color: var(--slate);
+      line-height: 1.2;
+      margin-bottom: 20px;
+      letter-spacing: -0.8px;
+    }
+
+    .hero .subtitle {
+      font-size: 20px;
+      color: var(--text);
+      max-width: 620px;
+      margin: 0 auto 40px;
+      line-height: 1.5;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--terracotta);
+      color: var(--white);
+      font-weight: 600;
+      font-size: 17px;
+      padding: 16px 36px;
+      border-radius: 8px;
+      transition: background 0.2s, transform 0.15s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #A84B1F;
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--slate);
+      border: 2px solid var(--slate);
+      margin-left: 12px;
+    }
+
+    .btn-outline:hover {
+      background: var(--slate);
+      color: var(--white);
+    }
+
+    /* Sections */
+    section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--slate);
+      text-align: center;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+
+    .section-lead {
+      text-align: center;
+      max-width: 580px;
+      margin: 0 auto 50px;
+      color: var(--text);
+      font-size: 18px;
+    }
+
+    /* Problem / Solution */
+    .problem-solution {
+      background: var(--white);
+    }
+
+    .two-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--warm-bg);
+      padding: 36px;
+      border-radius: 12px;
+    }
+
+    .card h3 {
+      font-size: 22px;
+      color: var(--slate);
+      margin-bottom: 14px;
+    }
+
+    .card p {
+      margin-bottom: 12px;
+    }
+
+    /* How it works */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      margin-top: 50px;
+    }
+
+    .step {
+      text-align: center;
+      padding: 24px 16px;
+    }
+
+    .step-num {
+      width: 48px;
+      height: 48px;
+      background: var(--slate);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 20px;
+      margin: 0 auto 18px;
+    }
+
+    .step h4 {
+      font-size: 17px;
+      color: var(--slate);
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    /* Demo */
+    .demo {
+      background: var(--slate);
+      color: var(--white);
+    }
+
+    .demo .section-title {
+      color: var(--white);
+    }
+
+    .demo .section-lead {
+      color: rgba(255,255,255,0.8);
+    }
+
+    .demo-box {
+      background: var(--warm-bg);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 48px;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .demo-box h3 {
+      font-size: 24px;
+      color: var(--slate);
+      margin-bottom: 16px;
+    }
+
+    .demo-box p {
+      margin-bottom: 28px;
+      font-size: 17px;
+    }
+
+    .demo-features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .demo-features span {
+      background: rgba(30,41,59,0.08);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      color: var(--slate);
+    }
+
+    /* Benefits */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .benefit {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 24px;
+      background: var(--white);
+      border-radius: 12px;
+    }
+
+    .benefit-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--terracotta);
+      border-radius: 8px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+    }
+
+    .benefit h4 {
+      font-size: 18px;
+      color: var(--slate);
+      margin-bottom: 6px;
+    }
+
+    /* For whom */
+    .for-whom {
+      background: var(--white);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .tag {
+      background: var(--warm-bg);
+      padding: 12px 22px;
+      border-radius: 30px;
+      font-size: 16px;
+      color: var(--slate);
+      font-weight: 500;
+    }
+
+    /* CTA final */
+    .final-cta {
+      text-align: center;
+      padding: 100px 0;
+      background: var(--warm-bg);
+    }
+
+    .final-cta h2 {
+      font-size: 36px;
+      color: var(--slate);
+      margin-bottom: 16px;
+    }
+
+    .final-cta p {
+      font-size: 19px;
+      margin-bottom: 36px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.2s;
+    }
+
+    .contact-btn.wa {
+      background: #25D366;
+      color: white;
+    }
+
+    .contact-btn.tg {
+      background: #229ED9;
+      color: white;
+    }
+
+    .contact-btn.mail {
+      background: var(--slate);
+      color: white;
+    }
+
+    .contact-btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--slate);
+      color: rgba(255,255,255,0.7);
+      padding: 40px 0;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    footer a {
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .two-cols, .steps, .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+      .steps {
+        gap: 16px;
+      }
+      .header-contacts {
+        display: none;
+      }
+      .hero {
+        padding: 60px 0 70px;
+      }
+      .demo-box {
+        padding: 32px 24px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .btn-outline {
+        margin-left: 0;
+        margin-top: 12px;
+      }
+      .contact-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-inner">
+      <div class="logo">
+        <!-- Simple SVG version of the chosen BS monogram logo -->
+        <svg class="logo-mark" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 8 H36 C48 8 54 18 54 28 C54 38 48 48 36 48 H12 V8 Z" fill="#1E293B"/>
+          <path d="M12 8 H28 C38 8 44 16 44 26 C44 36 38 44 28 44 H12 V8 Z" fill="#1E293B"/>
+          <path d="M28 26 L44 18 L44 34 Z" fill="#C45C26"/>
+          <path d="M32 48 L32 58 L28 54 L36 54 Z" fill="#C45C26"/>
+        </svg>
+        <div class="logo-text">BASH <span>Site</span></div>
+      </div>
+      <div class="header-contacts">
+        <a href="mailto:bash.site@mail.ru">bash.site@mail.ru</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>Готовый подход к сайту<br>для бизнеса в Иглинском районе</h1>
+      <p class="subtitle">
+        Сначала вы видите демо-версию сайта специально под ваш бизнес.<br>
+        Если всё нравится — заключаем договор и завершаем работу.
+      </p>
+      <div>
+        <a href="#contact" class="btn">Получить демо под мой бизнес</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem / Solution -->
+  <section class="problem-solution">
+    <div class="container">
+      <h2 class="section-title">Почему многие до сих пор без сайта</h2>
+      <p class="section-lead">И теряют клиентов каждый день</p>
+
+      <div class="two-cols">
+        <div class="card">
+          <h3>Обычный путь</h3>
+          <p>Долгие брифы, согласования, правки.</p>
+          <p>Непонятно, что получится в итоге.</p>
+          <p>Риск потратить деньги и время впустую.</p>
+          <p>Многие так и остаются без нормального сайта.</p>
+        </div>
+        <div class="card">
+          <h3>Подход BASH Site</h3>
+          <p>Сначала вы видите демо под ваш бизнес.</p>
+          <p>Оцениваете результат своими глазами.</p>
+          <p>Только после этого заключаем договор.</p>
+          <p>Минимум риска. Максимум ясности.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section>
+    <div class="container">
+      <h2 class="section-title">Как это работает</h2>
+      <p class="section-lead">Прозрачный процесс из четырёх шагов</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h4>Пишете мне</h4>
+          <p>WhatsApp, Telegram или на почту</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h4>Я делаю демо</h4>
+          <p>Изучаю ваш бизнес и готовлю демо-версию</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h4>Смотрите результат</h4>
+          <p>Оцениваете демо своими глазами</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h4>Договор</h4>
+          <p>Если всё нравится — заключаем договор и завершаем сайт</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo for builders -->
+  <section class="demo" id="demo">
+    <div class="container">
+      <h2 class="section-title">Пример демо для строительной компании</h2>
+      <p class="section-lead">Именно так выглядит демо-версия, которую я готовлю под конкретный бизнес</p>
+
+      <div class="demo-box">
+        <h3>Сайт строительной компании</h3>
+        <p>Услуги, реализованные объекты, преимущества, форма заявки, контакты, полностью адаптивная вёрстка.</p>
+        
+        <div class="demo-features">
+          <span>Каталог услуг</span>
+          <span>Портфолио объектов</span>
+          <span>Форма заявки</span>
+          <span>Мобильная версия</span>
+          <span>Быстрая загрузка</span>
+        </div>
+
+        <a href="#contact" class="btn">Хочу такое демо под свою компанию</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section>
+    <div class="container">
+      <h2 class="section-title">Почему этот подход удобен</h2>
+
+      <div class="benefits-grid">
+        <div class="benefit">
+          <div class="benefit-icon">1</div>
+          <div>
+            <h4>Вы видите результат до договора</h4>
+            <p>Никаких абстрактных обещаний. Сначала демо.</p>
+          </div>
+        </div>
+        <div class="benefit">
+          <div class="benefit-icon">2</div>
+          <div>
+            <h4>Локальный фокус</h4>
+            <p>Сайт делается с пониманием специфики Иглинского района.</p>
+          </div>
+        </div>
+        <div class="benefit">
+          <div class="benefit-icon">3</div>
+          <div>
+            <h4>Понятные сроки</h4>
+            <p>Демо — быстро. Полный сайт — после согласования.</p>
+          </div>
+        </div>
+        <div class="benefit">
+          <div class="benefit-icon">4</div>
+          <div>
+            <h4>Можно сразу использовать</h4>
+            <p>После завершения сайт готов к запуску рекламы и приёму заявок.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- For whom -->
+  <section class="for-whom">
+    <div class="container">
+      <h2 class="section-title">Для кого это подходит</h2>
+      <p class="section-lead">Для местного бизнеса, которому нужны заявки, а не просто «красивая картинка»</p>
+
+      <div class="tags">
+        <div class="tag">Строительство и ремонт</div>
+        <div class="tag">Торговля и опт</div>
+        <div class="tag">Производство</div>
+        <div class="tag">Услуги</div>
+        <div class="tag">Фермерские хозяйства</div>
+        <div class="tag">Автосервисы и мойки</div>
+        <div class="tag">Кафе и точки питания</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta" id="contact">
+    <div class="container">
+      <h2>Готовы посмотреть демо под ваш бизнес?</h2>
+      <p>Напишите мне. Сделаю демо-версию специально под вашу компанию.</p>
+
+      <div class="contact-buttons">
+        <a href="https://wa.me/79XXXXXXXXXX" class="contact-btn wa" target="_blank">
+          WhatsApp
+        </a>
+        <a href="https://t.me/your_username" class="contact-btn tg" target="_blank">
+          Telegram
+        </a>
+        <a href="mailto:bash.site@mail.ru" class="contact-btn mail">
+          bash.site@mail.ru
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2026 BASH Site · Сайты для бизнеса в Иглинском районе</p>
+      <p style="margin-top: 8px;">
+        <a href="mailto:bash.site@mail.ru">bash.site@mail.ru</a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>

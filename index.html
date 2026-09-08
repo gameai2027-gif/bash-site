@@ -31,14 +31,14 @@
     }
     .header-inner { display: flex; justify-content: space-between; align-items: center; }
     .logo { display: flex; align-items: center; gap: 12px; }
-    .logo-mark { width: 50px; height: 50px; flex-shrink: 0; }
+    .logo-mark { width: 52px; height: 52px; flex-shrink: 0; }
     .logo-text {
-      font-size: 21px; font-weight: 700; color: var(--slate);
+      font-size: 22px; font-weight: 700; color: var(--slate);
       letter-spacing: -0.4px; line-height: 1.15;
     }
     .logo-text span {
       display: block; font-size: 11px; font-weight: 500;
-      color: var(--terracotta); letter-spacing: 1.5px;
+      color: var(--terracotta); letter-spacing: 1.6px;
       text-transform: uppercase; margin-top: 1px;
     }
     .header-contacts a { font-size: 15px; color: var(--slate); font-weight: 500; }
@@ -144,16 +144,13 @@
     .mockup-card .photo {
       height: 120px; background-size: cover; background-position: center;
     }
-    /* Foundation - rebar cage in excavation (closest match to provided photo) */
     .mockup-card:nth-child(1) .photo {
-      background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=700&q=80');
-      background-position: center 40%;
+      background-image: url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=700&q=80');
+      background-position: center 30%;
     }
-    /* House frame */
     .mockup-card:nth-child(2) .photo {
       background-image: url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=700&q=80');
     }
-    /* Finishing */
     .mockup-card:nth-child(3) .photo {
       background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=80');
     }
@@ -230,7 +227,7 @@
     }
     @media (max-width: 600px) {
       .contact-buttons { flex-direction: column; align-items: center; }
-      .logo-mark { width: 44px; height: 44px; }
+      .logo-mark { width: 46px; height: 46px; }
     }
   </style>
 </head>
@@ -238,16 +235,12 @@
   <header>
     <div class="container header-inner">
       <div class="logo">
-        <!-- Upper-right selected style: interlocking BS monogram with terracotta accent + pointer -->
         <svg class="logo-mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="100" height="100" rx="18" fill="#1E293B"/>
-          <!-- Main B -->
-          <path d="M22 20h28c12 0 20 7 20 18 0 9-6 15-15 17l18 25h-14L45 58H34v22H22V20z" fill="#E8E6E1"/>
-          <path d="M34 32h14c5 0 9 3.5 9 8.5S53 49 48 49H34V32z" fill="#1E293B"/>
-          <!-- Interlocking S / terracotta shape -->
-          <path d="M52 36c8-6 22-4 22 8 0 8-6 13-14 15l-10 3c8 3 14 8 14 16 0 12-12 18-24 16" fill="none" stroke="#C45C26" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-          <!-- Pointer accent -->
-          <path d="M48 62v22l-7-6h14l-7 6V62z" fill="#C45C26"/>
+          <rect width="100" height="100" rx="16" fill="#1E293B"/>
+          <path d="M24 18h26c11 0 18 6.5 18 16.5S61 51 50 51H36v27H24V18z" fill="#E8E6E1"/>
+          <path d="M36 30h14c4.5 0 8 3 8 7.5S54.5 45 50 45H36V30z" fill="#1E293B"/>
+          <path d="M54 34c7-5 20-3 20 7 0 7-5 11-12 13l-9 2.5c7 2.5 12 7 12 14 0 10-10 15-20 13" fill="none" stroke="#C45C26" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M50 58v26l-6-5h12l-6 5V58z" fill="#C45C26"/>
         </svg>
         <div class="logo-text">
           BASH

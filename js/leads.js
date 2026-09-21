@@ -5,6 +5,11 @@
     sell: "Сайт, который продаёт",
     full: "Полный цикл"
   };
+  var SITE_STATUS = {
+    none: "Сайта нет",
+    old: "Есть, но устарел",
+    weak: "Есть, но не даёт заявок"
+  };
   var STATUSES = [
     ["new", "Новая"],
     ["contact", "Связались"],
@@ -26,9 +31,7 @@
     localStorage.setItem(KEY, JSON.stringify(rows));
   }
 
-  function now() {
-    return Date.now();
-  }
+  function now() { return Date.now(); }
 
   function event(kind, body) {
     return { kind: kind, body: body, at: now() };
@@ -45,6 +48,39 @@
     return d ? "https://wa.me/" + d : "";
   }
 
+  function summary(lead) {
+    return [
+      "Новая заявка BASH Site",
+      "Имя: " + lead.name,
+      "Связь: " + lead.phone,
+      "Ниша: " + (lead.business || "—"),
+      "Город / район: " + (lead.city || "—"),
+      "Сайт: " + (SITE_STATUS[lead.siteStatus] || lead.siteStatus || "—"),
+      "Пакет: " + (PACK[lead.package] || lead.package || "демо"),
+      "Задача: " + (lead.message || "—")
+    ].join("\n");
+  }
+
+  function notifyTelegram(lead) {
+    var cfg = root.BASH_SITE_CONFIG || {};
+    var token = cfg.telegramBotToken;
+    var chat = cfg.telegramChatId;
+    if (!token || !chat) {
+      return Promise.resolve({ ok: false, skipped: true });
+    }
+    var url = "https://api.telegram.org/bot" + token + "/sendMessage";
+    return fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: chat,
+        text: summary(lead)
+      })
+    }).then(function (r) { return r.json(); }).catch(function () {
+      return { ok: false };
+    });
+  }
+
   function create(data) {
     var rows = load();
     var name = String(data.name || "").trim();
@@ -55,6 +91,8 @@
       name: name,
       phone: phone,
       business: String(data.business || "").trim(),
+      city: String(data.city || "").trim(),
+      siteStatus: data.siteStatus || "",
       package: pkg,
       message: String(data.message || "").trim(),
       status: "new",
@@ -62,14 +100,38 @@
       createdAt: now(),
       updatedAt: now(),
       events: [
-        event("created", "Заявка поступила с сайта BASH Site."),
-        event("auto_welcome", "Клиенту: «" + name + ", заявка принята. Пакет «" + (PACK[pkg] || pkg) + "». Ответим в рабочее время»."),
-        event("auto_telegram", "Уведомление владельцу: новая заявка в кабинете."),
-        event("auto_qualify", "Сценарий квалификации: ниша, есть ли сайт, когда удобно созвониться.")
+        event("created", "Заявка с сайта BASH Site."),
+        event("auto_welcome", "Клиенту: заявка принята, ответ в течение одного рабочего дня."),
+        event("auto_qualify", "Уточнить услугу, район и канал связи перед демо.")
       ]
     };
     rows.unshift(lead);
     save(rows);
+    lead._notify = notifyTelegram(lead).then(function (res) {
+      if (res && res.ok) {
+        var fresh = load();
+        var row = fresh.find(function (x) { return x.id === lead.id; });
+        if (row) {
+          row.events.push(event("auto_telegram", "Заявка ушла в Telegram."));
+          save(fresh);
+        }
+      } else if (!(res && res.skipped)) {
+        var fresh2 = load();
+        var row2 = fresh2.find(function (x) { return x.id === lead.id; });
+        if (row2) {
+          row2.events.push(event("auto_telegram", "Telegram не настроен или не принял сообщение. Заявка сохранена в кабинете."));
+          save(fresh2);
+        }
+      } else {
+        var fresh3 = load();
+        var row3 = fresh3.find(function (x) { return x.id === lead.id; });
+        if (row3) {
+          row3.events.push(event("auto_telegram", "Telegram-токен не задан. Заявка только в кабинете."));
+          save(fresh3);
+        }
+      }
+      return res;
+    });
     return lead;
   }
 
@@ -99,12 +161,11 @@
 
   function seedIfEmpty() {
     if (load().length) return false;
-    var samples = [
-      { name: "Руслан", phone: "+7 917 439-14-05", business: "ООО ЭЛЕКТРОМОНТАЖ", package: "full", message: "Нет сайта, нужен монтаж + заявки" },
-      { name: "Алексей", phone: "8-967-454-15-58", business: "Системы Безопасности РБ", package: "sell", message: "Хотим демо под видеонаблюдение" },
-      { name: "Ирина", phone: "+7 927 962-45-54", business: "Абажур", package: "control", message: "Слаботочка, заявки теряются в WhatsApp" }
-    ];
-    samples.forEach(function (s, i) {
+    [
+      { name: "Руслан", phone: "+7 917 000-00-01", business: "Электромонтаж", city: "Уфа", siteStatus: "none", package: "full", message: "Нужен сайт и контроль заявок" },
+      { name: "Алексей", phone: "+7 967 000-00-02", business: "Видеонаблюдение", city: "Уфа", siteStatus: "weak", package: "sell", message: "Сайт есть, заявок нет" },
+      { name: "Ирина", phone: "+7 927 000-00-03", business: "Слаботочка", city: "Пригород", siteStatus: "old", package: "control", message: "Заявки теряются в чатах" }
+    ].forEach(function (s, i) {
       var lead = create(s);
       if (i === 1) updateStatus(lead.id, "contact");
       if (i === 2) updateStatus(lead.id, "demo");
@@ -122,7 +183,7 @@
       row.events = row.events || [];
       var already = row.events.some(function (e) { return e.kind === "reminder" && e.at > limit; });
       if (already) return;
-      row.events.push(event("reminder", "Напоминание: заявка без движения больше суток. Позвонить / написать в WhatsApp."));
+      row.events.push(event("reminder", "Нет движения больше суток. Связаться."));
       row.updatedAt = now();
       count += 1;
     });
@@ -130,9 +191,22 @@
     return count;
   }
 
+  function injectMetrika() {
+    var id = (root.BASH_SITE_CONFIG || {}).metrikaId;
+    if (!id || root.ym) return;
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
+      m[i].l = 1 * new Date();
+      k = e.createElement(t); a = e.getElementsByTagName(t)[0];
+      k.async = 1; k.src = r; a.parentNode.insertBefore(k, a);
+    })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    ym(id, "init", { clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true });
+  }
+
   root.BashLeads = {
     KEY: KEY,
     PACK: PACK,
+    SITE_STATUS: SITE_STATUS,
     STATUSES: STATUSES,
     load: load,
     save: save,
@@ -141,6 +215,7 @@
     addNote: addNote,
     seedIfEmpty: seedIfEmpty,
     reminders: reminders,
-    waLink: waLink
+    waLink: waLink,
+    injectMetrika: injectMetrika
   };
 })(window);

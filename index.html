@@ -3,28 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BASH Site — Сайт + система заявок для бизнеса в Иглинском районе</title>
-  <meta name="description" content="Сайт + автоматизация заявок для местного бизнеса. Сначала демо — потом договор. Пакеты от 75 000 ₽. WhatsApp, Telegram, CRM.">
-  <meta name="keywords" content="сайт для бизнеса Иглино, система заявок, автоматизация продаж, CRM для малого бизнеса, BASH Site">
-  <meta name="author" content="BASH Site">
+  <title>BASH Site — путь от рекламы до обработанной заявки</title>
+  <meta name="description" content="Не просто сайт: настраиваю понятный путь от рекламы или карты до заявки, которая не теряется. Сначала демо главной страницы под вашу услугу.">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#1E293B">
   <link rel="canonical" href="https://gameai2027-gif.github.io/bash-site/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ru_RU">
-  <meta property="og:site_name" content="BASH Site">
-  <meta property="og:title" content="BASH Site — Сайт + система заявок для бизнеса">
-  <meta property="og:description" content="Сначала демо под ваш бизнес. Потом сайт + автоматизация заявок. Без риска.">
+  <meta property="og:title" content="BASH Site — сайт + обработанная заявка">
+  <meta property="og:description" content="Сначала демо под вашу услугу. Потом сайт, формы и уведомления в ваш канал.">
   <meta property="og:url" content="https://gameai2027-gif.github.io/bash-site/">
   <meta property="og:image" content="https://gameai2027-gif.github.io/bash-site/logo.png.jpg">
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"ProfessionalService","name":"BASH Site","description":"Сайты и системы заявок для бизнеса в Иглинском районе. Модель: сначала демо, потом договор.","url":"https://gameai2027-gif.github.io/bash-site/","email":"bash.site@mail.ru","image":"https://gameai2027-gif.github.io/bash-site/logo.png.jpg","areaServed":[{"@type":"AdministrativeArea","name":"Иглинский район"},{"@type":"AdministrativeArea","name":"Республика Башкортостан"}],"serviceType":["Создание сайтов","Автоматизация заявок","CRM для малого бизнеса","Демо-версия сайта"],"priceRange":"₽₽₽","availableLanguage":"Russian"}
-  </script>
   <style>
     :root { --slate:#1E293B; --warm-bg:#F8F7F4; --terracotta:#C45C26; --text:#5C534A; --white:#FFFFFF; }
     * { margin:0; padding:0; box-sizing:border-box; }
     html { scroll-behavior:smooth; }
-    body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; background:var(--warm-bg); color:var(--text); line-height:1.55; font-size:16px; }
+    body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; background:var(--warm-bg); color:var(--text); line-height:1.55; font-size:16px; }
     a { text-decoration:none; color:inherit; }
     .container { max-width:1120px; margin:0 auto; padding:0 20px; }
     header { padding:10px 0; background:var(--warm-bg); border-bottom:1px solid rgba(30,41,59,0.07); position:sticky; top:0; z-index:100; }
@@ -33,49 +27,52 @@
     .logo img { height:44px; width:auto; max-width:44px; object-fit:contain; display:block; border-radius:8px; background:#1E293B; }
     .logo-text { font-size:20px; font-weight:700; color:var(--slate); letter-spacing:-0.3px; line-height:1.1; }
     .logo-text span { display:block; font-size:10px; font-weight:500; color:var(--terracotta); letter-spacing:1.4px; text-transform:uppercase; margin-top:1px; }
-    .header-contacts a { font-size:14px; color:var(--slate); font-weight:500; }
-    .header-contacts a:hover { color:var(--terracotta); }
-    .hero { padding:56px 0 52px; text-align:center; }
-    .hero h1 { font-size:clamp(28px,7vw,44px); font-weight:700; color:var(--slate); line-height:1.18; margin-bottom:14px; letter-spacing:-0.8px; }
-    .hero .subtitle { font-size:16px; color:var(--text); max-width:540px; margin:0 auto 28px; line-height:1.5; }
-    .btn { display:inline-block; background:var(--terracotta); color:var(--white); font-weight:600; font-size:15px; padding:14px 28px; border-radius:8px; transition:background 0.2s,transform 0.15s; }
+    .cabinet-link { font-size:14px; color:var(--slate); font-weight:600; }
+    .cabinet-link:hover { color:var(--terracotta); }
+    .hero { padding:56px 0 48px; text-align:center; }
+    .hero h1 { font-size:clamp(26px,6.4vw,42px); font-weight:700; color:var(--slate); line-height:1.18; margin-bottom:14px; letter-spacing:-0.7px; }
+    .hero .subtitle { font-size:17px; color:var(--text); max-width:640px; margin:0 auto 26px; line-height:1.5; }
+    .btn { display:inline-block; background:var(--terracotta); color:var(--white); font-weight:600; font-size:15px; padding:14px 28px; border-radius:8px; border:0; cursor:pointer; transition:background 0.2s,transform 0.15s; }
     .btn:hover { background:#A84B1F; transform:translateY(-1px); }
     .btn-outline { background:transparent; border:2px solid var(--terracotta); color:var(--terracotta); }
     .btn-outline:hover { background:var(--terracotta); color:#fff; }
     section { padding:48px 0; }
-    #contact, #packages { scroll-margin-top:72px; }
+    #contact, #packages, #demo, #process { scroll-margin-top:72px; }
     .section-title { font-size:clamp(22px,5vw,30px); font-weight:700; color:var(--slate); text-align:center; margin-bottom:8px; letter-spacing:-0.4px; }
-    .section-lead { text-align:center; max-width:520px; margin:0 auto 28px; color:var(--text); font-size:15px; line-height:1.45; }
+    .section-lead { text-align:center; max-width:560px; margin:0 auto 28px; color:var(--text); font-size:15px; line-height:1.45; }
     .problem-solution { background:var(--white); }
     .two-cols { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
     .card { background:var(--warm-bg); padding:24px 20px; border-radius:12px; }
     .card h3 { font-size:18px; color:var(--slate); margin-bottom:10px; }
     .card p { margin-bottom:6px; font-size:15px; line-height:1.45; }
-    .steps { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
-    .step { text-align:center; padding:18px 12px; background:var(--white); border-radius:12px; }
-    .step-num { width:36px; height:36px; background:var(--slate); color:var(--white); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; margin:0 auto 10px; }
+    .steps { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; }
+    .step { text-align:left; padding:16px 14px; background:var(--white); border-radius:12px; }
+    .step-num { width:32px; height:32px; background:var(--slate); color:var(--white); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; margin-bottom:10px; }
     .step h4 { font-size:15px; color:var(--slate); margin-bottom:4px; }
     .step p { font-size:13px; color:var(--text); line-height:1.35; }
     .packages { background:var(--white); }
     .packages-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-    .package { background:var(--warm-bg); border-radius:14px; padding:24px 20px; display:flex; flex-direction:column; border:1px solid transparent; transition:border-color 0.2s, transform 0.15s; }
-    .package:hover { border-color:rgba(196,92,38,0.3); transform:translateY(-2px); }
+    .package { background:var(--warm-bg); border-radius:14px; padding:24px 20px; display:flex; flex-direction:column; border:1px solid transparent; }
     .package.featured { background:var(--slate); color:#fff; }
     .package.featured h3, .package.featured .price, .package.featured li { color:#fff; }
-    .package.featured .price span { color:rgba(255,255,255,0.7); }
+    .package.featured .price span, .package.featured .desc { color:rgba(255,255,255,0.75); }
     .package.featured .btn { background:var(--terracotta); }
     .package h3 { font-size:18px; color:var(--slate); margin-bottom:6px; }
-    .package .price { font-size:26px; font-weight:700; color:var(--slate); margin-bottom:4px; }
+    .package .price { font-size:24px; font-weight:700; color:var(--slate); margin-bottom:2px; }
     .package .price span { font-size:14px; font-weight:500; color:var(--text); }
-    .package .desc { font-size:14px; margin-bottom:16px; line-height:1.4; opacity:0.9; }
+    .package .month { font-size:13px; margin-bottom:10px; opacity:0.9; }
+    .package .desc { font-size:14px; margin-bottom:14px; line-height:1.4; }
     .package ul { list-style:none; margin-bottom:20px; flex-grow:1; }
     .package li { font-size:14px; padding:5px 0; padding-left:18px; position:relative; line-height:1.35; }
     .package li::before { content:"✓"; position:absolute; left:0; color:var(--terracotta); font-weight:700; }
     .package.featured li::before { color:#fdba74; }
     .package .btn { width:100%; text-align:center; margin-top:auto; }
+    .price-note { text-align:center; font-size:13px; margin-top:16px; max-width:640px; margin-left:auto; margin-right:auto; }
     .demo { background:var(--slate); color:var(--white); }
     .demo .section-title { color:var(--white); }
     .demo .section-lead { color:rgba(255,255,255,0.78); }
+    .demo-points { max-width:720px; margin:0 auto 22px; display:grid; gap:10px; }
+    .demo-points p { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:12px 14px; font-size:15px; line-height:1.4; }
     .demo-wrapper { max-width:880px; margin:0 auto; }
     .browser-mockup { background:#0f172a; border-radius:12px; overflow:hidden; box-shadow:0 20px 40px -12px rgba(0,0,0,0.45); border:1px solid rgba(255,255,255,0.1); }
     .browser-bar { background:#1e293b; padding:10px 12px; display:flex; align-items:center; gap:6px; }
@@ -83,11 +80,11 @@
     .browser-dot:nth-child(1) { background:#ef4444; }
     .browser-dot:nth-child(2) { background:#eab308; }
     .browser-dot:nth-child(3) { background:#22c55e; }
-    .browser-url { margin-left:10px; background:#0f172a; color:transparent; text-shadow:0 0 8px rgba(148,163,184,0.9); font-size:11px; padding:5px 12px; border-radius:6px; flex-grow:1; filter:blur(4px); user-select:none; }
+    .browser-url { margin-left:10px; background:#0f172a; color:#94a3b8; font-size:11px; padding:5px 12px; border-radius:6px; flex-grow:1; }
     .mockup-content { background:#fff; color:#1e293b; }
     .mockup-topbar { display:flex; align-items:center; gap:8px; padding:10px 14px; background:#f8fafc; border-bottom:1px solid #e2e8f0; }
     .mockup-company-logo { width:30px; height:30px; background:#1e293b; border-radius:7px; display:flex; align-items:center; justify-content:center; color:#C45C26; font-weight:700; font-size:12px; }
-    .mockup-company-name { font-size:13px; font-weight:600; color:#1e293b; }
+    .mockup-company-name { font-size:13px; font-weight:600; }
     .mockup-hero {
       background-color:#1e293b;
       background-image:linear-gradient(135deg,rgba(15,23,42,0.72) 0%,rgba(30,41,59,0.62) 100%),url('demo-hero.jpg.jpg');
@@ -96,216 +93,113 @@
       display:flex; flex-direction:column; justify-content:center; align-items:center;
     }
     .mockup-badge { display:inline-block; background:rgba(196,92,38,0.35); color:#fdba74; font-size:11px; font-weight:600; padding:4px 10px; border-radius:16px; margin-bottom:10px; }
-    .mockup-hero h3 { font-size:20px; margin-bottom:8px; font-weight:700; letter-spacing:-0.3px; text-shadow:0 2px 8px rgba(0,0,0,0.3); line-height:1.25; }
-    .mockup-hero p { font-size:13px; opacity:0.95; margin-bottom:14px; text-shadow:0 1px 4px rgba(0,0,0,0.3); }
-    .mockup-btn { display:inline-block; background:#C45C26; color:white; padding:10px 18px; border-radius:8px; font-size:13px; font-weight:600; box-shadow:0 4px 12px rgba(196,92,38,0.4); }
+    .mockup-hero h3 { font-size:20px; margin-bottom:8px; font-weight:700; line-height:1.25; }
+    .mockup-hero p { font-size:13px; opacity:0.95; margin-bottom:14px; }
+    .mockup-btn { display:inline-block; background:#C45C26; color:white; padding:10px 18px; border-radius:8px; font-size:13px; font-weight:600; }
     .mockup-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; padding:14px 12px; background:#f8fafc; }
     .mockup-card { background:white; border-radius:10px; overflow:hidden; box-shadow:0 3px 10px rgba(0,0,0,0.06); border:1px solid #e2e8f0; display:flex; flex-direction:column; }
-    .mockup-card .photo { height:130px; min-height:130px; background-size:cover; background-position:center center; background-repeat:no-repeat; background-color:#cbd5e1; flex-shrink:0; }
-    .mockup-card:nth-child(1) .photo { background-image:url('foundation.jpg.jpg'); background-color:#78716c; }
-    .mockup-card:nth-child(2) .photo { background-image:url('demo-frame.jpg.jpg'); background-color:#a8a29e; }
-    .mockup-card:nth-child(3) .photo { background-image:url('demo-finish.jpg.jpg'); background-color:#d6d3d1; }
-    .mockup-card .info { padding:12px 10px 14px; text-align:center; background:#fff; border-top:1px solid #f1f5f9; flex-shrink:0; }
-    .mockup-card h4 { font-size:14px; color:#1e293b; margin-bottom:4px; font-weight:600; }
+    .mockup-card .photo { height:130px; min-height:130px; background-size:cover; background-position:center; background-color:#cbd5e1; }
+    .mockup-card:nth-child(1) .photo { background-image:url('foundation.jpg.jpg'); }
+    .mockup-card:nth-child(2) .photo { background-image:url('demo-frame.jpg.jpg'); }
+    .mockup-card:nth-child(3) .photo { background-image:url('demo-finish.jpg.jpg'); }
+    .mockup-card .info { padding:12px 10px 14px; text-align:center; }
+    .mockup-card h4 { font-size:14px; margin-bottom:4px; }
     .mockup-card p { font-size:13px; color:#C45C26; font-weight:600; }
-    .mockup-trust { display:flex; justify-content:center; gap:14px; padding:10px 12px; background:#f1f5f9; border-top:1px solid #e2e8f0; font-size:11px; color:#475569; flex-wrap:wrap; }
-    .mockup-footer { background:#1e293b; color:rgba(255,255,255,0.75); text-align:center; padding:10px; font-size:11px; }
-    .demo-caption { text-align:center; margin-top:16px; color:rgba(255,255,255,0.75); font-size:13px; line-height:1.4; }
+    .example-label { text-align:center; font-size:12px; color:#64748b; padding:8px 12px 12px; background:#fff; }
+    .demo-caption { text-align:center; margin-top:16px; color:rgba(255,255,255,0.78); font-size:13px; line-height:1.45; max-width:640px; margin-left:auto; margin-right:auto; }
     .demo-cta { text-align:center; margin-top:18px; }
-    .benefits-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
-    .benefit { display:flex; gap:12px; align-items:flex-start; padding:18px 14px; background:var(--white); border-radius:12px; }
-    .benefit-icon { width:34px; height:34px; background:var(--terracotta); border-radius:8px; flex-shrink:0; display:flex; align-items:center; justify-content:center; color:white; font-weight:700; font-size:14px; }
-    .benefit h4 { font-size:15px; color:var(--slate); margin-bottom:3px; }
-    .benefit p { font-size:14px; line-height:1.4; }
-    .for-whom { background:var(--warm-bg); }
-    .tags { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:16px; }
+    .process { background:var(--warm-bg); }
+    .process .step { background:#fff; }
+    .tags { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; }
     .tag { background:var(--white); padding:8px 14px; border-radius:24px; font-size:13px; color:var(--slate); font-weight:500; }
     .final-cta { text-align:center; padding:56px 0; background:var(--white); }
-    .final-cta h2 { font-size:clamp(22px,5vw,32px); color:var(--slate); margin-bottom:10px; letter-spacing:-0.5px; }
-    .final-cta p { font-size:15px; margin-bottom:24px; max-width:440px; margin-left:auto; margin-right:auto; line-height:1.45; }
-    .contact-buttons { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
-    .contact-btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:13px 22px; border-radius:8px; font-weight:600; font-size:14px; transition:all 0.2s; min-width:160px; }
-    .contact-btn.wa { background:#25D366; color:white; }
-    .contact-btn.tg { background:#229ED9; color:white; }
-    .contact-btn.mail { background:var(--slate); color:white; }
-    .contact-btn:hover { transform:translateY(-1px); opacity:0.93; }
-
-    .lead-form { max-width:520px; margin:28px auto 0; text-align:left; background:#fff; padding:20px; border-radius:14px; border:1px solid rgba(30,41,59,.08); }
-    .lead-form label { display:block; font-size:14px; color:#1E293B; font-weight:600; margin-bottom:10px; }
-    .lead-form input, .lead-form select, .lead-form textarea { display:block; width:100%; margin-top:4px; padding:10px; border-radius:8px; border:1px solid #e2e8f0; font:inherit; background:#fff; }
-    .lead-form .btn { width:100%; border:0; cursor:pointer; }
-    .lead-ok { display:none; margin-top:12px; font-size:14px; color:#1E293B; }
-    .cabinet-link { font-size:14px; color:var(--slate); font-weight:600; margin-right:14px; }
-    .cabinet-link:hover { color:var(--terracotta); }
+    .final-cta h2 { font-size:clamp(22px,5vw,32px); color:var(--slate); margin-bottom:10px; }
+    .final-cta > .container > p { font-size:15px; margin-bottom:8px; max-width:520px; margin-left:auto; margin-right:auto; }
+    .lead-form { max-width:520px; margin:24px auto 0; text-align:left; background:var(--warm-bg); padding:22px; border-radius:14px; border:1px solid rgba(30,41,59,.08); }
+    .lead-form label { display:block; font-size:14px; color:#1E293B; font-weight:600; margin-bottom:12px; }
+    .lead-form input, .lead-form select, .lead-form textarea { display:block; width:100%; margin-top:5px; padding:11px; border-radius:8px; border:1px solid #e2e8f0; font:inherit; background:#fff; }
+    .lead-form .btn { width:100%; }
+    .lead-ok { display:none; margin-top:14px; font-size:15px; color:#1E293B; line-height:1.45; background:#fff; border-radius:10px; padding:14px; }
+    .form-hint { font-size:12px; font-weight:500; color:var(--text); margin-top:4px; }
     footer { background:var(--slate); color:rgba(255,255,255,0.65); padding:24px 0; text-align:center; font-size:13px; }
     footer a { color:rgba(255,255,255,0.9); }
     @media (max-width:900px) {
-      .two-cols,.steps,.benefits-grid,.packages-grid { grid-template-columns:1fr; }
+      .two-cols, .packages-grid, .steps { grid-template-columns:1fr; }
       .mockup-grid { grid-template-columns:1fr; }
-      .header-contacts a:not(.cabinet-link) { display:none; }
       .hero { padding:40px 0 36px; }
-      .hero .subtitle br { display:none; }
       section { padding:36px 0; }
-      .section-lead { margin-bottom:20px; }
-      .card { padding:20px 16px; }
-      .step { padding:14px 12px; text-align:left; display:flex; align-items:flex-start; gap:12px; }
-      .step-num { margin:0; flex-shrink:0; }
-      .step h4 { margin-bottom:2px; }
-      .mockup-hero { padding:28px 16px 24px; min-height:150px; }
-      .mockup-hero h3 { font-size:18px; }
-      .mockup-grid { padding:12px; gap:10px; }
-      .mockup-card .photo { height:160px; min-height:160px; }
-      .mockup-trust { flex-direction:column; gap:6px; align-items:center; }
-      .benefit { padding:14px 12px; }
-      .final-cta { padding:40px 0; }
-      .tags { gap:6px; }
-      .tag { padding:7px 12px; font-size:12px; }
+      .mockup-card .photo { height:160px; }
     }
     @media (max-width:600px) {
-      body { font-size:15px; line-height:1.5; }
       .container { padding:0 16px; }
-      .logo img { height:40px; max-width:40px; }
-      .logo-text { font-size:18px; }
-      .hero h1 { font-size:26px; margin-bottom:12px; }
-      .hero .subtitle { font-size:15px; margin-bottom:22px; }
-      .btn { width:100%; max-width:320px; text-align:center; padding:13px 20px; }
-      .contact-buttons { flex-direction:column; align-items:stretch; max-width:280px; margin:0 auto; }
-      .contact-btn { width:100%; min-width:0; }
-      .demo-caption { font-size:12px; padding:0 4px; }
+      .hero h1 { font-size:26px; }
+      .btn { width:100%; max-width:360px; text-align:center; }
     }
   </style>
 </head>
 <body>
   <header>
     <div class="container header-inner">
-      <div class="logo">
+      <a class="logo" href="./">
         <img src="logo.png.jpg" width="44" height="44" alt="BASH Site">
         <div class="logo-text">BASH<span>Site</span></div>
-      </div>
-      <div class="header-contacts">
-        <a class="cabinet-link" href="crm.html">Кабинет заявок</a>
-        <a href="mailto:bash.site@mail.ru">bash.site@mail.ru</a>
-      </div>
+      </a>
+      <a class="cabinet-link" href="crm.html">Кабинет заявок</a>
     </div>
   </header>
 
   <section class="hero">
     <div class="container">
-      <h1>Сайт + система заявок<br>для бизнеса в Иглинском районе</h1>
-      <p class="subtitle">Сначала вы видите демо под свой бизнес.<br>Потом получаете сайт, который принимает заявки и не даёт им теряться.</p>
-      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-        <a href="#packages" class="btn">Смотреть пакеты</a>
-        <a href="#contact" class="btn btn-outline">Получить демо</a>
-      </div>
+      <h1>Я не просто делаю сайт —<br>я настраиваю путь до обработанной заявки</h1>
+      <p class="subtitle">От рекламы или карты до понятного сообщения у вас в Telegram или WhatsApp. Сначала демо главной страницы под вашу услугу. Потом запуск.</p>
+      <a href="#contact" class="btn">Получить демо сайта</a>
     </div>
   </section>
 
   <section class="problem-solution">
     <div class="container">
-      <h2 class="section-title">Почему сайт сам по себе часто не работает</h2>
-      <p class="section-lead">И что мы делаем иначе</p>
+      <h2 class="section-title">Сайт без системы заявок почти всегда простаивает</h2>
+      <p class="section-lead">Красивая страница ничего не стоит, если обращение теряется в почте или чате</p>
       <div class="two-cols">
         <div class="card">
-          <h3>Обычный подход</h3>
-          <p>Красивый сайт без системы.</p>
-          <p>Заявки приходят в почту или теряются.</p>
-          <p>Нет контроля, кто ответил и когда.</p>
-          <p>Владелец не понимает, сколько реально лидов.</p>
+          <h3>Как обычно</h3>
+          <p>Сайт «для присутствия в интернете».</p>
+          <p>Форма уходит в неизвестность.</p>
+          <p>Неясно, кто ответил и когда.</p>
         </div>
         <div class="card">
-          <h3>Подход BASH Site</h3>
-          <p>Сначала демо — вы видите результат.</p>
-          <p>Сайт + автоматическая отправка заявок.</p>
-          <p>Простая CRM или Telegram-уведомления.</p>
-          <p>Вы контролируете поток, а не надеетесь.</p>
+          <h3>Как делаю я</h3>
+          <p>Главная под вашу услугу и район работы.</p>
+          <p>Заявка сразу в выбранный канал и в кабинет.</p>
+          <p>Видно статус: новая, связались, демо, сделка.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="packages" class="packages">
+  <section id="demo" class="demo">
     <div class="container">
-      <h2 class="section-title">Три готовых пакета</h2>
-      <p class="section-lead">Выбираете уровень системы под свои задачи</p>
-      <div class="packages-grid">
-        <div class="package">
-          <h3>Заявки под контролем</h3>
-          <div class="price">75 000 ₽</div>
-          <p class="desc">Для автосервисов, монтажников, служб</p>
-          <ul>
-            <li>Многостраничный сайт</li>
-            <li>Форма заявки + WhatsApp</li>
-            <li>Заявки сразу в Telegram</li>
-            <li>Простая таблица со статусами</li>
-            <li>2 автоматических сообщения клиенту</li>
-            <li>Обучение 40–60 минут</li>
-          </ul>
-          <a href="#contact" class="btn pkg-pick" data-pkg="control">Выбрать пакет</a>
-        </div>
-        <div class="package featured">
-          <h3>Сайт, который продаёт</h3>
-          <div class="price">95 000 ₽</div>
-          <p class="desc">Для юристов, стоматологий, специалистов</p>
-          <ul>
-            <li>Продающий многостраничный сайт</li>
-            <li>Умная форма записи</li>
-            <li>WhatsApp / Telegram интеграция</li>
-            <li>Сценарии: приветствие, квалификация, напоминание</li>
-            <li>Блок доверия и экспертности</li>
-            <li>1 месяц поддержки</li>
-          </ul>
-          <a href="#contact" class="btn pkg-pick" data-pkg="sell">Выбрать пакет</a>
-        </div>
-        <div class="package">
-          <h3>Полный цикл</h3>
-          <div class="price">145 000 ₽</div>
-          <p class="desc">Для тех, у кого уже есть поток заявок</p>
-          <ul>
-            <li>Всё из пакета «Сайт, который продаёт»</li>
-            <li>Простая CRM с воронкой</li>
-            <li>Автоматизация этапов сделки</li>
-            <li>Напоминания менеджеру</li>
-            <li>Дашборд по заявкам</li>
-            <li>Обучение команды</li>
-          </ul>
-          <a href="#contact" class="btn pkg-pick" data-pkg="full">Выбрать пакет</a>
-        </div>
+      <h2 class="section-title">Сделаю пример главной страницы под вашу услугу</h2>
+      <p class="section-lead">Перед запуском вы увидите структуру, дизайн, оффер и способ получения заявок</p>
+      <div class="demo-points">
+        <p>Это не шаблон «для всех»: адаптирую текст, услуги, район работы, контакты и кнопки связи под ваш бизнес.</p>
+        <p>Ниже — макет для условной строительной компании. Цифры в карточках — пример цен её услуг, не стоимость разработки сайта.</p>
       </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <h2 class="section-title">Как это работает</h2>
-      <p class="section-lead">Прозрачный процесс без сюрпризов</p>
-      <div class="steps">
-        <div class="step"><div class="step-num">1</div><div><h4>Пишете</h4><p>WhatsApp, Telegram или почта</p></div></div>
-        <div class="step"><div class="step-num">2</div><div><h4>Демо</h4><p>Готовлю демо под ваш бизнес</p></div></div>
-        <div class="step"><div class="step-num">3</div><div><h4>Выбор</h4><p>Смотрите результат и выбираете пакет</p></div></div>
-        <div class="step"><div class="step-num">4</div><div><h4>Запуск</h4><p>Сайт + система заявок готовы к работе</p></div></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="demo" id="demo">
-    <div class="container">
-      <h2 class="section-title">Пример демо для строительной компании</h2>
-      <p class="section-lead">Так выглядит демо, которое я готовлю под конкретный бизнес</p>
       <div class="demo-wrapper">
         <div class="browser-mockup">
           <div class="browser-bar">
             <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
-            <div class="browser-url">stroy-iglino.ru</div>
+            <div class="browser-url">пример главной · не ваш будущий адрес</div>
           </div>
           <div class="mockup-content">
             <div class="mockup-topbar">
               <div class="mockup-company-logo">СИ</div>
-              <div class="mockup-company-name">СтройИглино</div>
+              <div class="mockup-company-name">Пример: строительная компания</div>
             </div>
             <div class="mockup-hero">
-              <div class="mockup-badge">Строительство · Иглинский район</div>
-              <h3>Строим дома под ключ<br>с гарантией качества</h3>
-              <p>Смета за 1 день · Работаем по всему району</p>
+              <div class="mockup-badge">Пример оффера клиента</div>
+              <h3>Строим дома под ключ<br>с понятной сметой</h3>
+              <p>Выезд, расчёт, срок — без «от и до» в воздухе</p>
               <div class="mockup-btn">Получить расчёт стоимости</div>
             </div>
             <div class="mockup-grid">
@@ -313,112 +207,172 @@
               <div class="mockup-card"><div class="photo"></div><div class="info"><h4>Коробка дома</h4><p>от 1,2 млн ₽</p></div></div>
               <div class="mockup-card"><div class="photo"></div><div class="info"><h4>Отделка</h4><p>от 450 000 ₽</p></div></div>
             </div>
-            <div class="mockup-trust">
-              <span>47 объектов сдано</span><span>Гарантия 3 года</span><span>Работаем с 2019</span>
-            </div>
-            <div class="mockup-footer">с. Иглино · Работаем по Иглинскому району</div>
+            <p class="example-label">Пример блока услуг для строительной компании. Это цены услуг клиента, не цена сайта.</p>
           </div>
         </div>
-        <p class="demo-caption">Это пример. Для вашего бизнеса дизайн, тексты и структура будут индивидуальными</p>
-        <div class="demo-cta"><a href="#contact" class="btn">Хочу такое демо под свою компанию</a></div>
+        <p class="demo-caption">Для вашего бизнеса будут другие тексты, услуги и кнопки. Макет нужен, чтобы вы увидели логику страницы до оплаты запуска.</p>
+        <div class="demo-cta"><a href="#contact" class="btn">Получить демо под мой бизнес</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="packages" class="packages">
+    <div class="container">
+      <h2 class="section-title">Запуск от 75 000 ₽</h2>
+      <p class="section-lead">Один раз собираем сайт и контур заявок. Сопровождение — по желанию, помесячно</p>
+      <div class="packages-grid">
+        <div class="package">
+          <h3>Заявки под контролем</h3>
+          <div class="price">от 75 000 ₽ <span>запуск</span></div>
+          <p class="month">сопровождение не входит</p>
+          <p class="desc">Сайт + форма + уведомление в мессенджер</p>
+          <ul>
+            <li>Главная и страницы услуг</li>
+            <li>Форма и кнопки WhatsApp / Telegram</li>
+            <li>Заявки в выбранный канал</li>
+            <li>Простая таблица статусов</li>
+          </ul>
+          <a href="#contact" class="btn pkg-pick" data-pkg="control">Получить демо сайта</a>
+        </div>
+        <div class="package featured">
+          <h3>Сайт, который продаёт</h3>
+          <div class="price">от 95 000 ₽ <span>запуск</span></div>
+          <p class="month">сопровождение от 2 900 ₽ / мес</p>
+          <p class="desc">Оффер, доверие и сценарии первого ответа</p>
+          <ul>
+            <li>Продающая структура под нишу</li>
+            <li>Умная форма записи</li>
+            <li>Приветствие и квалификация</li>
+            <li>1 месяц правок после запуска</li>
+          </ul>
+          <a href="#contact" class="btn pkg-pick" data-pkg="sell">Получить демо сайта</a>
+        </div>
+        <div class="package">
+          <h3>Полный цикл</h3>
+          <div class="price">от 145 000 ₽ <span>запуск</span></div>
+          <p class="month">сопровождение от 4 900 ₽ / мес</p>
+          <p class="desc">Кабинет, воронка и контроль сделок</p>
+          <ul>
+            <li>Всё из пакета выше</li>
+            <li>Кабинет заявок с воронкой</li>
+            <li>Напоминания и дашборд</li>
+            <li>Обучение, как вести заявки</li>
+          </ul>
+          <a href="#contact" class="btn pkg-pick" data-pkg="full">Получить демо сайта</a>
+        </div>
+      </div>
+      <p class="price-note">«От» — старт под типовую услугу. Точная сумма после демо: зависит от объёма страниц и интеграций. Ежемесячная оплата — хостинг, мелкие правки и контроль, что заявки доходят.</p>
+    </div>
+  </section>
+
+  <section id="process" class="process">
+    <div class="container">
+      <h2 class="section-title">Как строится работа</h2>
+      <p class="section-lead">Без выдуманных отзывов. Сначала действие, потом запуск</p>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><h4>Уточняем</h4><p>Услугу, район и способ связи.</p></div>
+        <div class="step"><div class="step-num">2</div><h4>Демо</h4><p>Готовлю демо-версию главной страницы.</p></div>
+        <div class="step"><div class="step-num">3</div><h4>Пакет</h4><p>Вы выбираете пакет и оплачиваете запуск.</p></div>
+        <div class="step"><div class="step-num">4</div><h4>Подключение</h4><p>Домен, формы и уведомления.</p></div>
+        <div class="step"><div class="step-num">5</div><h4>Работает</h4><p>Вы получаете заявки в выбранный канал.</p></div>
       </div>
     </div>
   </section>
 
   <section>
     <div class="container">
-      <h2 class="section-title">Почему это удобно</h2>
-      <div class="benefits-grid">
-        <div class="benefit"><div class="benefit-icon">1</div><div><h4>Сначала результат</h4><p>Вы видите демо до оплаты основной работы.</p></div></div>
-        <div class="benefit"><div class="benefit-icon">2</div><div><h4>Не только сайт</h4><p>Заявки приходят туда, где вы их видите, и не теряются.</p></div></div>
-        <div class="benefit"><div class="benefit-icon">3</div><div><h4>Локальный фокус</h4><p>Понимаю специфику Иглинского района и малого бизнеса.</p></div></div>
-        <div class="benefit"><div class="benefit-icon">4</div><div><h4>Понятные пакеты</h4><p>Три уровня — выбираете под свои задачи и бюджет.</p></div></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="for-whom">
-    <div class="container">
-      <h2 class="section-title">Для кого это</h2>
-      <p class="section-lead">Для местного бизнеса, которому нужны заявки и контроль, а не просто «красивая картинка»</p>
+      <h2 class="section-title">Для локального бизнеса, которому нужны заявки</h2>
+      <p class="section-lead">Понимаю специфику локального бизнеса: карты, сарафан, короткий цикл решения</p>
       <div class="tags">
-        <div class="tag">Автосервисы и шиномонтаж</div>
+        <div class="tag">Автосервисы</div>
         <div class="tag">Монтаж и слаботочка</div>
         <div class="tag">Строительство и ремонт</div>
-        <div class="tag">Частные юристы</div>
+        <div class="tag">Частные специалисты</div>
         <div class="tag">Стоматологии</div>
-        <div class="tag">Услуги</div>
-        <div class="tag">Производство</div>
-        <div class="tag">Торговля</div>
+        <div class="tag">Услуги рядом с клиентом</div>
       </div>
     </div>
   </section>
 
   <section class="final-cta" id="contact">
     <div class="container">
-      <h2>Готовы посмотреть демо под ваш бизнес?</h2>
-      <p>Оставьте заявку — она сразу попадёт в кабинет со статусом «Новая». Это тот же контур, что продаём клиентам.</p>
+      <h2>Получить демо сайта</h2>
+      <p>Коротко опишите услугу. Напишу в течение одного рабочего дня и подготовлю направление для демо.</p>
       <form id="lead-form" class="lead-form">
         <label>Имя
           <input required name="name" autocomplete="name">
         </label>
-        <label>Телефон
-          <input required name="phone" type="tel" autocomplete="tel" placeholder="+7 ...">
+        <label>Телефон / Telegram / WhatsApp
+          <input required name="phone" autocomplete="tel" placeholder="+7… или @username">
+          <span class="form-hint">Один контакт, по которому вам удобно ответить</span>
         </label>
-        <label>Ниша / компания
-          <input name="business" placeholder="Автосервис, юрист, стоматология...">
+        <label>Ниша или вид услуг
+          <input required name="business" placeholder="Например: автосервис, юрист, стоматология">
         </label>
-        <label>Пакет
-          <select name="package" id="pkg-select">
-            <option value="control">Заявки под контролем — 75 000 ₽</option>
-            <option value="sell" selected>Сайт, который продаёт — 95 000 ₽</option>
-            <option value="full">Полный цикл — 145 000 ₽</option>
+        <label>Город / район работы
+          <input required name="city" placeholder="Где принимаете клиентов">
+        </label>
+        <label>Есть ли текущий сайт?
+          <select name="siteStatus" required>
+            <option value="" disabled selected>Выберите</option>
+            <option value="none">Нет</option>
+            <option value="old">Есть, но устарел</option>
+            <option value="weak">Есть, но не даёт заявок</option>
           </select>
         </label>
-        <label>Задача
-          <textarea name="message" rows="3" placeholder="Коротко: что нужно"></textarea>
-        </label>
-        <button class="btn" type="submit">Отправить в кабинет</button>
-        <p id="lead-ok" class="lead-ok">Заявка сохранена. <a href="crm.html">Открыть кабинет</a></p>
+        <input type="hidden" name="package" id="pkg-select" value="sell">
+        <button class="btn" type="submit" data-goal="lead">Получить демо и расчёт</button>
+        <p id="lead-ok" class="lead-ok">Заявка принята. Напишу вам в течение одного рабочего дня, уточню услуги и подготовлю направление для демо.</p>
       </form>
-      <p style="margin:14px 0 18px;font-size:13px"><a href="crm.html">Открыть кабинет заявок →</a></p>
-
-      <div class="contact-buttons">
-        <a href="https://wa.me/79XXXXXXXXXX" class="contact-btn wa" target="_blank" rel="noopener">WhatsApp</a>
-        <a href="https://t.me/your_username" class="contact-btn tg" target="_blank" rel="noopener">Telegram</a>
-        <a href="mailto:bash.site@mail.ru" class="contact-btn mail">bash.site@mail.ru</a>
-      </div>
     </div>
   </section>
 
   <footer>
     <div class="container">
-      <p>© 2026 BASH Site · Сайт + система заявок для бизнеса в Иглинском районе</p>
-      <p style="margin-top:6px;"><a href="mailto:bash.site@mail.ru">bash.site@mail.ru</a></p>
+      <p>© 2026 BASH Site · сайт и контур заявок для локального бизнеса</p>
+      <p style="margin-top:6px;"><a href="crm.html">Кабинет заявок</a></p>
     </div>
   </footer>
+  <script src="js/config.js"></script>
   <script src="js/leads.js"></script>
   <script>
     (function () {
-      var sel = document.getElementById("pkg-select");
+      if (window.BashLeads) BashLeads.injectMetrika();
+      var hidden = document.getElementById("pkg-select");
       document.querySelectorAll(".pkg-pick").forEach(function (a) {
         a.addEventListener("click", function () {
-          if (sel && a.dataset.pkg) sel.value = a.dataset.pkg;
+          if (hidden && a.dataset.pkg) hidden.value = a.dataset.pkg;
+        });
+      });
+      document.querySelectorAll('a[href="#contact"]').forEach(function (a) {
+        a.addEventListener("click", function () {
+          if (window.ym && window.BASH_SITE_CONFIG.metrikaId) {
+            ym(window.BASH_SITE_CONFIG.metrikaId, "reachGoal", "cta_demo");
+          }
         });
       });
       document.getElementById("lead-form").addEventListener("submit", function (e) {
         e.preventDefault();
         var fd = new FormData(e.target);
-        BashLeads.create({
+        var lead = BashLeads.create({
           name: fd.get("name"),
           phone: fd.get("phone"),
           business: fd.get("business"),
-          package: fd.get("package"),
-          message: fd.get("message"),
+          city: fd.get("city"),
+          siteStatus: fd.get("siteStatus"),
+          package: fd.get("package") || "sell",
           source: "site"
         });
-        document.getElementById("lead-ok").style.display = "block";
+        var ok = document.getElementById("lead-ok");
+        ok.style.display = "block";
+        if (window.ym && window.BASH_SITE_CONFIG.metrikaId) {
+          ym(window.BASH_SITE_CONFIG.metrikaId, "reachGoal", "lead_submit");
+        }
         e.target.reset();
+        hidden.value = "sell";
+        if (lead && lead._notify) {
+          lead._notify.then(function () { /* кабинет обновит события */ });
+        }
       });
     })();
   </script>

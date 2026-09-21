@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Кабинет заявок — BASH Site</title>
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#1E293B">
   <style>
     :root { --slate:#1E293B; --warm-bg:#F8F7F4; --terracotta:#C45C26; --text:#5C534A; --white:#FFFFFF; }
     * { box-sizing:border-box; margin:0; padding:0; }
@@ -37,60 +36,64 @@
     textarea, input, select { width:100%; border:1px solid rgba(30,41,59,.12); border-radius:8px; padding:10px; font:inherit; background:#fff; }
     textarea { min-height:76px; }
     .event { background:#fff; border-radius:10px; padding:10px; margin-top:8px; font-size:13px; }
-    .kind { font-size:11px; font-weight:700; color:var(--terracotta); text-transform:uppercase; letter-spacing:.04em; }
+    .kind { font-size:11px; font-weight:700; color:var(--terracotta); text-transform:uppercase; }
     .row { display:flex; gap:8px; flex-wrap:wrap; margin:10px 0; }
     .form-card { background:#fff; border-radius:12px; padding:12px; margin:0 16px 16px; }
     .form-card h3 { color:var(--slate); font-size:14px; margin-bottom:8px; }
     .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-    @media (max-width:800px) {
-      .stats { grid-template-columns:1fr 1fr; }
-      .grid2 { grid-template-columns:1fr; }
-    }
+    .warn { margin:0 16px 12px; font-size:13px; }
+    @media (max-width:800px) { .stats { grid-template-columns:1fr 1fr; } .grid2 { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
   <header>
     <div>
       <h1>Кабинет заявок</h1>
-      <p class="muted">Рабочая воронка BASH Site. Заявки этого браузера — как живой тест пакета «Полный цикл».</p>
+      <p class="muted">Воронка BASH Site. Заявки этого браузера + дубль в Telegram, если задан токен в js/config.js</p>
     </div>
     <div class="actions">
       <button class="btn btn-dark" id="remind" type="button">Напоминания</button>
       <a class="btn btn-ghost" href="./">На сайт</a>
     </div>
   </header>
-
+  <p class="warn" id="tg-status"></p>
   <div class="stats" id="stats"></div>
-
   <div class="form-card">
     <h3>Добавить заявку вручную</h3>
     <form id="manual" class="grid2">
-      <input name="name" required placeholder="Имя" autocomplete="name">
-      <input name="phone" required placeholder="Телефон" autocomplete="tel">
-      <input name="business" placeholder="Компания / ниша">
+      <input name="name" required placeholder="Имя">
+      <input name="phone" required placeholder="Телефон / Telegram / WhatsApp">
+      <input name="business" placeholder="Ниша">
+      <input name="city" placeholder="Город / район">
+      <select name="siteStatus">
+        <option value="none">Сайта нет</option>
+        <option value="old">Есть, но устарел</option>
+        <option value="weak">Есть, но не даёт заявок</option>
+      </select>
       <select name="package">
         <option value="control">Заявки под контролем</option>
         <option value="sell" selected>Сайт, который продаёт</option>
         <option value="full">Полный цикл</option>
       </select>
-      <input name="message" placeholder="Задача" style="grid-column:1/-1">
       <button class="btn btn-primary" type="submit">Сохранить в воронку</button>
     </form>
   </div>
-
   <div class="board" id="board"></div>
   <div class="drawer" id="drawer"><div class="panel" id="panel"></div></div>
-
+  <script src="js/config.js"></script>
   <script src="js/leads.js"></script>
   <script>
     var L = window.BashLeads;
     L.seedIfEmpty();
+    var cfg = window.BASH_SITE_CONFIG || {};
+    document.getElementById("tg-status").textContent = (cfg.telegramBotToken && cfg.telegramChatId)
+      ? "Telegram: заявки дублируются боту."
+      : "Telegram пока не подключен. Откройте js/config.js и вставьте telegramBotToken и telegramChatId.";
 
     function escapeHtml(s) {
       var map = {"&":"&"+"amp;","<":"&"+"lt;",">":"&"+"gt;",'"':"&"+"quot;","'":"&#39;"};
       return String(s || "").replace(/[&<>"']/g, function (c) { return map[c]; });
     }
-
     function render() {
       var rows = L.load();
       var won = rows.filter(function (r) { return r.status === "deal"; }).length;
@@ -104,25 +107,19 @@
       ].map(function (p) {
         return '<div class="stat"><span class="small">' + p[0] + "</span><b>" + p[1] + "</b></div>";
       }).join("");
-
       document.getElementById("board").innerHTML = L.STATUSES.map(function (s) {
         var items = rows.filter(function (r) { return r.status === s[0]; });
-        return '<section class="col"><h2>' + s[1] + "<span>" + items.length + "</span></h2>" +
-          items.map(card).join("") + "</section>";
+        return '<section class="col"><h2>' + s[1] + "<span>" + items.length + "</span></h2>" + items.map(card).join("") + "</section>";
       }).join("");
-
       document.querySelectorAll("[data-id]").forEach(function (el) {
         el.onclick = function () { open(+el.dataset.id); };
       });
     }
-
     function card(r) {
       return '<button class="card" type="button" data-id="' + r.id + '"><strong>' +
-        escapeHtml(r.name) + '</strong><div class="small">' +
-        escapeHtml(L.PACK[r.package] || r.package) +
+        escapeHtml(r.name) + '</strong><div class="small">' + escapeHtml(r.city || r.business || "") +
         '</div><div class="small">' + escapeHtml(r.phone) + "</div></button>";
     }
-
     function open(id) {
       var r = L.load().find(function (x) { return x.id === id; });
       if (!r) return;
@@ -132,30 +129,25 @@
       document.getElementById("panel").innerHTML =
         '<button class="chip" id="close" type="button">Закрыть</button>' +
         '<h2 style="margin:12px 0 6px;color:var(--slate)">' + escapeHtml(r.name) + "</h2>" +
-        '<p class="small">' + escapeHtml(r.business || "") + "</p>" +
+        '<p class="small">' + escapeHtml(r.business || "") + " · " + escapeHtml(r.city || "") + "</p>" +
+        '<p class="small">' + escapeHtml(L.SITE_STATUS[r.siteStatus] || "") + "</p>" +
         "<p style=\"margin:8px 0\">" + escapeHtml(r.phone) + "</p>" +
-        '<p class="small">' + escapeHtml(r.message || "") + "</p>" +
         '<div class="row">' +
           (wa ? '<a class="btn btn-primary" href="' + wa + '" target="_blank" rel="noopener">WhatsApp</a>' : "") +
           '<a class="btn btn-ghost" href="tel:' + escapeHtml(r.phone) + '">Позвонить</a>' +
         "</div>" +
-        '<div style="margin:8px 0">' + L.STATUSES.map(function (s) {
+        '<div>' + L.STATUSES.map(function (s) {
           return '<button class="chip' + (r.status === s[0] ? " on" : "") + '" type="button" data-st="' + s[0] + '">' + s[1] + "</button>";
         }).join("") + "</div>" +
-        '<textarea id="note" placeholder="Заметка по заявке"></textarea>' +
+        '<textarea id="note" placeholder="Заметка"></textarea>' +
         '<p style="margin:8px 0"><button class="btn btn-dark" type="button" id="addnote">Сохранить заметку</button></p>' +
         (r.events || []).slice().reverse().map(function (ev) {
           return '<div class="event"><div class="kind">' + escapeHtml(ev.kind) + "</div>" + escapeHtml(ev.body) + "</div>";
         }).join("");
-
       document.getElementById("close").onclick = function () { drawer.classList.remove("open"); };
       drawer.onclick = function (e) { if (e.target === drawer) drawer.classList.remove("open"); };
       document.querySelectorAll("[data-st]").forEach(function (b) {
-        b.onclick = function () {
-          L.updateStatus(id, b.dataset.st);
-          render();
-          open(id);
-        };
+        b.onclick = function () { L.updateStatus(id, b.dataset.st); render(); open(id); };
       });
       document.getElementById("addnote").onclick = function () {
         var t = document.getElementById("note").value.trim();
@@ -164,13 +156,11 @@
         open(id);
       };
     }
-
     document.getElementById("remind").onclick = function () {
       var n = L.reminders();
-      alert(n ? "Напоминаний поставлено: " + n : "Нет заявок без движения больше суток.");
+      alert(n ? "Напоминаний: " + n : "Нет заявок без движения больше суток.");
       render();
     };
-
     document.getElementById("manual").addEventListener("submit", function (e) {
       e.preventDefault();
       var fd = new FormData(e.target);
@@ -178,14 +168,14 @@
         name: fd.get("name"),
         phone: fd.get("phone"),
         business: fd.get("business"),
+        city: fd.get("city"),
+        siteStatus: fd.get("siteStatus"),
         package: fd.get("package"),
-        message: fd.get("message"),
         source: "manual"
       });
       e.target.reset();
       render();
     });
-
     render();
   </script>
 </body>

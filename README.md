@@ -1,9 +1,14 @@
 # BASH Site
 
-Лендинг + рабочий кабинет заявок для бизнеса в Иглинском районе.
+Сайт: https://gameai2027-gif.github.io/bash-site/
+Кабинет: https://gameai2027-gif.github.io/bash-site/crm.html
 
-- Сайт: https://gameai2027-gif.github.io/bash-site/
-- Кабинет: https://gameai2027-gif.github.io/bash-site/crm.html
+## Telegram и Метрика
+Откройте `js/config.js` и заполните:
+- telegramBotToken
+- telegramChatId
+- metrikaId
 
-Заявки с формы сохраняются в браузере (localStorage) и сразу видны в воронке.
-Это тестовый контур пакета «Полный цикл»: статусы, заметки, WhatsApp, напоминания.
+После этого форма дублирует заявку в Telegram, кабинет сохраняет её в воронке.
+
+Домен лучше подключить поверх GitHub Pages (Cloudflare), чтобы ссылка не выглядела как черновик.

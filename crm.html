@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кабинет заявок — BASH Site</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1E293B">
+  <style>
+    :root { --slate:#1E293B; --warm-bg:#F8F7F4; --terracotta:#C45C26; --text:#5C534A; --white:#FFFFFF; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; background:var(--warm-bg); color:var(--text); }
+    header { position:sticky; top:0; z-index:20; background:var(--warm-bg); border-bottom:1px solid rgba(30,41,59,.08); padding:12px 16px; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
+    a { color:inherit; text-decoration:none; }
+    h1 { font-size:20px; color:var(--slate); }
+    .muted { font-size:13px; margin-top:3px; }
+    .actions { display:flex; gap:8px; flex-wrap:wrap; }
+    button, .btn { font:inherit; cursor:pointer; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; border:0; border-radius:8px; padding:10px 14px; font-weight:600; font-size:13px; }
+    .btn-primary { background:var(--terracotta); color:#fff; }
+    .btn-dark { background:var(--slate); color:#fff; }
+    .btn-ghost { background:#fff; border:1px solid rgba(30,41,59,.12); color:var(--slate); }
+    .stats { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; padding:16px; }
+    .stat { background:#fff; border-radius:12px; padding:12px; }
+    .stat b { display:block; font-size:22px; color:var(--slate); }
+    .small { font-size:12px; }
+    .board { display:flex; gap:10px; overflow-x:auto; padding:0 16px 28px; }
+    .col { min-width:240px; flex:1; background:rgba(255,255,255,.7); border-radius:14px; padding:8px; }
+    .col h2 { font-size:13px; color:var(--slate); padding:8px; display:flex; justify-content:space-between; }
+    .card { background:#fff; border:1px solid rgba(30,41,59,.1); border-radius:12px; padding:12px; margin-bottom:8px; cursor:pointer; text-align:left; width:100%; font:inherit; color:inherit; }
+    .card strong { color:var(--slate); display:block; }
+    .drawer { position:fixed; inset:0; background:rgba(15,23,42,.42); display:none; justify-content:flex-end; z-index:40; }
+    .drawer.open { display:flex; }
+    .panel { width:min(440px,100%); background:var(--warm-bg); overflow:auto; padding:16px; }
+    .chip { border:0; background:#fff; border-radius:999px; padding:7px 11px; margin:2px; cursor:pointer; font-size:12px; }
+    .chip.on { background:var(--slate); color:#fff; }
+    textarea, input, select { width:100%; border:1px solid rgba(30,41,59,.12); border-radius:8px; padding:10px; font:inherit; background:#fff; }
+    textarea { min-height:76px; }
+    .event { background:#fff; border-radius:10px; padding:10px; margin-top:8px; font-size:13px; }
+    .kind { font-size:11px; font-weight:700; color:var(--terracotta); text-transform:uppercase; letter-spacing:.04em; }
+    .row { display:flex; gap:8px; flex-wrap:wrap; margin:10px 0; }
+    .form-card { background:#fff; border-radius:12px; padding:12px; margin:0 16px 16px; }
+    .form-card h3 { color:var(--slate); font-size:14px; margin-bottom:8px; }
+    .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    @media (max-width:800px) {
+      .stats { grid-template-columns:1fr 1fr; }
+      .grid2 { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Кабинет заявок</h1>
+      <p class="muted">Рабочая воронка BASH Site. Заявки этого браузера — как живой тест пакета «Полный цикл».</p>
+    </div>
+    <div class="actions">
+      <button class="btn btn-dark" id="remind" type="button">Напоминания</button>
+      <a class="btn btn-ghost" href="./">На сайт</a>
+    </div>
+  </header>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="form-card">
+    <h3>Добавить заявку вручную</h3>
+    <form id="manual" class="grid2">
+      <input name="name" required placeholder="Имя" autocomplete="name">
+      <input name="phone" required placeholder="Телефон" autocomplete="tel">
+      <input name="business" placeholder="Компания / ниша">
+      <select name="package">
+        <option value="control">Заявки под контролем</option>
+        <option value="sell" selected>Сайт, который продаёт</option>
+        <option value="full">Полный цикл</option>
+      </select>
+      <input name="message" placeholder="Задача" style="grid-column:1/-1">
+      <button class="btn btn-primary" type="submit">Сохранить в воронку</button>
+    </form>
+  </div>
+
+  <div class="board" id="board"></div>
+  <div class="drawer" id="drawer"><div class="panel" id="panel"></div></div>
+
+  <script src="js/leads.js"></script>
+  <script>
+    var L = window.BashLeads;
+    L.seedIfEmpty();
+
+    function escapeHtml(s) {
+      var map = {"&":"&"+"amp;","<":"&"+"lt;",">":"&"+"gt;",'"':"&"+"quot;","'":"&#39;"};
+      return String(s || "").replace(/[&<>"']/g, function (c) { return map[c]; });
+    }
+
+    function render() {
+      var rows = L.load();
+      var won = rows.filter(function (r) { return r.status === "deal"; }).length;
+      var conv = rows.length ? Math.round(won / rows.length * 100) : 0;
+      document.getElementById("stats").innerHTML = [
+        ["Всего", rows.length],
+        ["Новые", rows.filter(function (r) { return r.status === "new"; }).length],
+        ["В работе", rows.filter(function (r) { return r.status === "contact" || r.status === "demo"; }).length],
+        ["Сделки", won],
+        ["Конверсия", conv + "%"]
+      ].map(function (p) {
+        return '<div class="stat"><span class="small">' + p[0] + "</span><b>" + p[1] + "</b></div>";
+      }).join("");
+
+      document.getElementById("board").innerHTML = L.STATUSES.map(function (s) {
+        var items = rows.filter(function (r) { return r.status === s[0]; });
+        return '<section class="col"><h2>' + s[1] + "<span>" + items.length + "</span></h2>" +
+          items.map(card).join("") + "</section>";
+      }).join("");
+
+      document.querySelectorAll("[data-id]").forEach(function (el) {
+        el.onclick = function () { open(+el.dataset.id); };
+      });
+    }
+
+    function card(r) {
+      return '<button class="card" type="button" data-id="' + r.id + '"><strong>' +
+        escapeHtml(r.name) + '</strong><div class="small">' +
+        escapeHtml(L.PACK[r.package] || r.package) +
+        '</div><div class="small">' + escapeHtml(r.phone) + "</div></button>";
+    }
+
+    function open(id) {
+      var r = L.load().find(function (x) { return x.id === id; });
+      if (!r) return;
+      var drawer = document.getElementById("drawer");
+      var wa = L.waLink(r.phone);
+      drawer.classList.add("open");
+      document.getElementById("panel").innerHTML =
+        '<button class="chip" id="close" type="button">Закрыть</button>' +
+        '<h2 style="margin:12px 0 6px;color:var(--slate)">' + escapeHtml(r.name) + "</h2>" +
+        '<p class="small">' + escapeHtml(r.business || "") + "</p>" +
+        "<p style=\"margin:8px 0\">" + escapeHtml(r.phone) + "</p>" +
+        '<p class="small">' + escapeHtml(r.message || "") + "</p>" +
+        '<div class="row">' +
+          (wa ? '<a class="btn btn-primary" href="' + wa + '" target="_blank" rel="noopener">WhatsApp</a>' : "") +
+          '<a class="btn btn-ghost" href="tel:' + escapeHtml(r.phone) + '">Позвонить</a>' +
+        "</div>" +
+        '<div style="margin:8px 0">' + L.STATUSES.map(function (s) {
+          return '<button class="chip' + (r.status === s[0] ? " on" : "") + '" type="button" data-st="' + s[0] + '">' + s[1] + "</button>";
+        }).join("") + "</div>" +
+        '<textarea id="note" placeholder="Заметка по заявке"></textarea>' +
+        '<p style="margin:8px 0"><button class="btn btn-dark" type="button" id="addnote">Сохранить заметку</button></p>' +
+        (r.events || []).slice().reverse().map(function (ev) {
+          return '<div class="event"><div class="kind">' + escapeHtml(ev.kind) + "</div>" + escapeHtml(ev.body) + "</div>";
+        }).join("");
+
+      document.getElementById("close").onclick = function () { drawer.classList.remove("open"); };
+      drawer.onclick = function (e) { if (e.target === drawer) drawer.classList.remove("open"); };
+      document.querySelectorAll("[data-st]").forEach(function (b) {
+        b.onclick = function () {
+          L.updateStatus(id, b.dataset.st);
+          render();
+          open(id);
+        };
+      });
+      document.getElementById("addnote").onclick = function () {
+        var t = document.getElementById("note").value.trim();
+        if (!t) return;
+        L.addNote(id, t);
+        open(id);
+      };
+    }
+
+    document.getElementById("remind").onclick = function () {
+      var n = L.reminders();
+      alert(n ? "Напоминаний поставлено: " + n : "Нет заявок без движения больше суток.");
+      render();
+    };
+
+    document.getElementById("manual").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var fd = new FormData(e.target);
+      L.create({
+        name: fd.get("name"),
+        phone: fd.get("phone"),
+        business: fd.get("business"),
+        package: fd.get("package"),
+        message: fd.get("message"),
+        source: "manual"
+      });
+      e.target.reset();
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>

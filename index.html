@@ -129,12 +129,20 @@
     .contact-btn.tg { background:#229ED9; color:white; }
     .contact-btn.mail { background:var(--slate); color:white; }
     .contact-btn:hover { transform:translateY(-1px); opacity:0.93; }
+
+    .lead-form { max-width:520px; margin:28px auto 0; text-align:left; background:#fff; padding:20px; border-radius:14px; border:1px solid rgba(30,41,59,.08); }
+    .lead-form label { display:block; font-size:14px; color:#1E293B; font-weight:600; margin-bottom:10px; }
+    .lead-form input, .lead-form select, .lead-form textarea { display:block; width:100%; margin-top:4px; padding:10px; border-radius:8px; border:1px solid #e2e8f0; font:inherit; background:#fff; }
+    .lead-form .btn { width:100%; border:0; cursor:pointer; }
+    .lead-ok { display:none; margin-top:12px; font-size:14px; color:#1E293B; }
+    .cabinet-link { font-size:14px; color:var(--slate); font-weight:600; margin-right:14px; }
+    .cabinet-link:hover { color:var(--terracotta); }
     footer { background:var(--slate); color:rgba(255,255,255,0.65); padding:24px 0; text-align:center; font-size:13px; }
     footer a { color:rgba(255,255,255,0.9); }
     @media (max-width:900px) {
       .two-cols,.steps,.benefits-grid,.packages-grid { grid-template-columns:1fr; }
       .mockup-grid { grid-template-columns:1fr; }
-      .header-contacts { display:none; }
+      .header-contacts a:not(.cabinet-link) { display:none; }
       .hero { padding:40px 0 36px; }
       .hero .subtitle br { display:none; }
       section { padding:36px 0; }
@@ -175,6 +183,7 @@
         <div class="logo-text">BASH<span>Site</span></div>
       </div>
       <div class="header-contacts">
+        <a class="cabinet-link" href="crm.html">Кабинет заявок</a>
         <a href="mailto:bash.site@mail.ru">bash.site@mail.ru</a>
       </div>
     </div>
@@ -231,7 +240,7 @@
             <li>2 автоматических сообщения клиенту</li>
             <li>Обучение 40–60 минут</li>
           </ul>
-          <a href="#contact" class="btn">Выбрать пакет</a>
+          <a href="#contact" class="btn pkg-pick" data-pkg="control">Выбрать пакет</a>
         </div>
         <div class="package featured">
           <h3>Сайт, который продаёт</h3>
@@ -245,7 +254,7 @@
             <li>Блок доверия и экспертности</li>
             <li>1 месяц поддержки</li>
           </ul>
-          <a href="#contact" class="btn">Выбрать пакет</a>
+          <a href="#contact" class="btn pkg-pick" data-pkg="sell">Выбрать пакет</a>
         </div>
         <div class="package">
           <h3>Полный цикл</h3>
@@ -259,7 +268,7 @@
             <li>Дашборд по заявкам</li>
             <li>Обучение команды</li>
           </ul>
-          <a href="#contact" class="btn">Выбрать пакет</a>
+          <a href="#contact" class="btn pkg-pick" data-pkg="full">Выбрать пакет</a>
         </div>
       </div>
     </div>
@@ -348,7 +357,32 @@
   <section class="final-cta" id="contact">
     <div class="container">
       <h2>Готовы посмотреть демо под ваш бизнес?</h2>
-      <p>Напишите. Сделаю демо-версию и покажу, как будет работать сайт + система заявок именно для вас.</p>
+      <p>Оставьте заявку — она сразу попадёт в кабинет со статусом «Новая». Это тот же контур, что продаём клиентам.</p>
+      <form id="lead-form" class="lead-form">
+        <label>Имя
+          <input required name="name" autocomplete="name">
+        </label>
+        <label>Телефон
+          <input required name="phone" type="tel" autocomplete="tel" placeholder="+7 ...">
+        </label>
+        <label>Ниша / компания
+          <input name="business" placeholder="Автосервис, юрист, стоматология...">
+        </label>
+        <label>Пакет
+          <select name="package" id="pkg-select">
+            <option value="control">Заявки под контролем — 75 000 ₽</option>
+            <option value="sell" selected>Сайт, который продаёт — 95 000 ₽</option>
+            <option value="full">Полный цикл — 145 000 ₽</option>
+          </select>
+        </label>
+        <label>Задача
+          <textarea name="message" rows="3" placeholder="Коротко: что нужно"></textarea>
+        </label>
+        <button class="btn" type="submit">Отправить в кабинет</button>
+        <p id="lead-ok" class="lead-ok">Заявка сохранена. <a href="crm.html">Открыть кабинет</a></p>
+      </form>
+      <p style="margin:14px 0 18px;font-size:13px"><a href="crm.html">Открыть кабинет заявок →</a></p>
+
       <div class="contact-buttons">
         <a href="https://wa.me/79XXXXXXXXXX" class="contact-btn wa" target="_blank" rel="noopener">WhatsApp</a>
         <a href="https://t.me/your_username" class="contact-btn tg" target="_blank" rel="noopener">Telegram</a>
@@ -363,5 +397,30 @@
       <p style="margin-top:6px;"><a href="mailto:bash.site@mail.ru">bash.site@mail.ru</a></p>
     </div>
   </footer>
+  <script src="js/leads.js"></script>
+  <script>
+    (function () {
+      var sel = document.getElementById("pkg-select");
+      document.querySelectorAll(".pkg-pick").forEach(function (a) {
+        a.addEventListener("click", function () {
+          if (sel && a.dataset.pkg) sel.value = a.dataset.pkg;
+        });
+      });
+      document.getElementById("lead-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        var fd = new FormData(e.target);
+        BashLeads.create({
+          name: fd.get("name"),
+          phone: fd.get("phone"),
+          business: fd.get("business"),
+          package: fd.get("package"),
+          message: fd.get("message"),
+          source: "site"
+        });
+        document.getElementById("lead-ok").style.display = "block";
+        e.target.reset();
+      });
+    })();
+  </script>
 </body>
 </html>
